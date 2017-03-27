@@ -3,6 +3,9 @@
  */
 package modelo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -16,9 +19,19 @@ public class ClienteModelo extends Conector{
 		return null;
 	}
 	
-	public Cliente select(int id){
-		//TODO id hori duen cliente itzultzen du
-		return null;
+	public Cliente select(String id){
+			try {
+				Statement st = this.conexion.createStatement();
+				ResultSet rs = st.executeQuery("select * from clientes where id='" + id + "'");
+				rs.next();
+				Cliente cliente = new Cliente(rs.getString("id"), rs.getString("nombre"),
+										rs.getString("direccion"), rs.getString("codPostal"),
+										rs.getString("telefono"));	
+				return cliente;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+				return null;
 	}
 	
 	public void update(Cliente cliente){
