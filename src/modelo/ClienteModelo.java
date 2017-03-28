@@ -5,6 +5,7 @@ package modelo;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 public class ClienteModelo extends Conector {
 
+	
 	public ArrayList<Cliente> selectAll() {
 		// bezero guztiak itzuliko ditu
 
@@ -59,17 +61,18 @@ public class ClienteModelo extends Conector {
 	}
 
 	public void insert(Cliente cliente) {
-		Statement st;
+
 		try {
-			st = super.getConexion().createStatement();
-			System.out.println("INSERT INTO socios (id,nombre,direccion,codPostal,telefono) " + "VALUES ('"
-					+ cliente.getId() + "','" + cliente.getNombre() + "','" + cliente.getDireccion() + "','"
-					+ cliente.getCodPostal() + "','" + cliente.getTelefono() + "')");
-			st.execute("INSERT INTO socios (id,nombre,direccion,codPostal,telefono) " + "VALUES ('" + cliente.getId()
-					+ "','" + cliente.getNombre() + "','" + cliente.getNombre() + "','" + cliente.getCodPostal() + "','"
-					+ cliente.getTelefono() + "')");
+			PreparedStatement pst = super.getConexion().prepareStatement("insert into clientes (id, nombre, direccion, codPostal, telefono) values (?,?,?,?,?)");
+			
+			pst.setString(1,cliente.getId());
+			pst.setString(2,cliente.getNombre());
+			pst.setString(3,cliente.getDireccion());
+			pst.setString(4,cliente.getCodPostal());
+			pst.setString(5,cliente.getTelefono());
+			
+			pst.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

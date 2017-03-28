@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.ClienteControlador;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -16,147 +19,170 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class BezeroFormulario extends JDialog {
-
+	// ----- ATRIBUTOS
 	private final JPanel contentPanel = new JPanel();
+	private JTextField textField_id;
 	private JTextField textField_nombre;
-	private JTextField textField;
 	private JTextField textField_telefono;
 	private JTextField textField_direccion;
 	private JTextField textField_codPostal;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			BezeroFormulario dialog = new BezeroFormulario();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private ClienteControlador clienteControlador;
+
+	// ------ GETERS SETTERS
+	public ClienteControlador getClienteControlador() {
+		return clienteControlador;
 	}
 
-	/**
-	 * Create the dialog.
-	 */
-	public BezeroFormulario() {
+	public void setClienteControlador(ClienteControlador clienteControlador) {
+		this.clienteControlador = clienteControlador;
+	}
+
+	// ------- METODOS
+
+	private void formularioaGarbitu() {
+		textField_id.setText("");
+		textField_nombre.setText("");
+		textField_direccion.setText("");
+		textField_codPostal.setText("");
+		textField_telefono.setText("");
+
+	}
+
+	public BezeroFormulario(BezeroKudeaketa parent, boolean modal) {
+		super(parent, modal);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		
-		JLabel label_id = new JLabel("id");
-		label_id.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JLabel lblNombre = new JLabel("nombre");
-		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JLabel lblTelefono = new JLabel("telefono");
-		lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JLabel label_direccion = new JLabel("direccion");
-		label_direccion.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JLabel label_codPostal = new JLabel("codPostal");
-		label_codPostal.setHorizontalAlignment(SwingConstants.CENTER);
-		
+		getContentPane().add(contentPanel, BorderLayout.NORTH);
+
+		JLabel lbl_id = new JLabel("ID:");
+		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
+
+		JLabel lbl_nombre = new JLabel("Nombre:");
+		lbl_nombre.setHorizontalAlignment(SwingConstants.CENTER);
+
+		JLabel lbl_telefono = new JLabel("Telefono:");
+		lbl_telefono.setHorizontalAlignment(SwingConstants.CENTER);
+
+		JLabel lbl_direccion = new JLabel("Direccion:");
+		lbl_direccion.setHorizontalAlignment(SwingConstants.CENTER);
+
+		JLabel lbl_codPostal = new JLabel("CPostal:");
+		lbl_codPostal.setHorizontalAlignment(SwingConstants.CENTER);
+
+		textField_id = new JTextField();
+		textField_id.setColumns(10);
+
 		textField_nombre = new JTextField();
-		textField_nombre.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_nombre.setColumns(10);
-		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setColumns(10);
-		
+
 		textField_telefono = new JTextField();
 		textField_telefono.setColumns(10);
-		
+
 		textField_direccion = new JTextField();
 		textField_direccion.setColumns(10);
-		
+
 		textField_codPostal = new JTextField();
 		textField_codPostal.setColumns(10);
-		
-		JComboBox comboBox_Bezero = new JComboBox();
+
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				clienteControlador.bezeroBerriaSartu(textField_id.getText(), textField_nombre.getText(),
+						textField_direccion.getText(), textField_codPostal.getText(), textField_telefono.getText());
+				formularioaGarbitu();
+			}
+
+		});
+
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				formularioaGarbitu();
+				dispose();
+			}
+		});
+
+		JLabel lblInsertarUnNuevo = new JLabel("INSERTAR UN NUEVO CLIENTE");
+		lblInsertarUnNuevo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap()
+					.addGap(100)
+					.addComponent(lblInsertarUnNuevo))
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGap(262)
+					.addComponent(btnGuardar)
+					.addGap(6)
+					.addComponent(btnCancelar))
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGap(14)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(lbl_telefono)
+							.addGap(47)
+							.addComponent(textField_telefono, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(lbl_codPostal)
+							.addGap(53)
+							.addComponent(textField_codPostal, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(label_codPostal)
-								.addComponent(label_direccion)
-								.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING, false)
-									.addComponent(label_id, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addComponent(lblTelefono))
-							.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPanel.createSequentialGroup()
+									.addGap(9)
+									.addComponent(lbl_id))
+								.addComponent(lbl_nombre))
+							.addGap(52)
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField_telefono, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
-								.addComponent(textField_codPostal, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
-								.addComponent(textField_direccion, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
-								.addComponent(textField_nombre, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
-							.addComponent(comboBox_Bezero, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
-							.addGap(103))))
+								.addComponent(textField_id, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField_nombre, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(lbl_direccion)
+							.addGap(46)
+							.addComponent(textField_direccion, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addComponent(comboBox_Bezero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
+					.addGap(11)
+					.addComponent(lblInsertarUnNuevo)
+					.addGap(33)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_id)
-						.addComponent(textField_nombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(textField_id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbl_id))
+					.addGap(11)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNombre)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTelefono)
-						.addComponent(textField_telefono, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_direccion)
+						.addComponent(textField_nombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbl_nombre))
+					.addGap(4)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(7)
+							.addComponent(lbl_direccion))
 						.addComponent(textField_direccion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_codPostal)
-						.addComponent(textField_codPostal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(64, Short.MAX_VALUE))
+					.addGap(5)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(textField_codPostal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(10))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(lbl_codPostal)
+							.addPreferredGap(ComponentPlacement.UNRELATED)))
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(textField_telefono, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(11)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnGuardar)
+								.addComponent(btnCancelar)))
+						.addComponent(lbl_telefono)))
 		);
 		contentPanel.setLayout(gl_contentPanel);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
 	}
 }

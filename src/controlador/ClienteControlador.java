@@ -1,26 +1,74 @@
-/**
- * 
- */
 package controlador;
 
 import modelo.Cliente;
+import modelo.ClienteModelo;
+import vista.BezeroFormulario;
+import vista.BezeroKudeaketa;
+import vista.Nagusia;
 
 /**
- * @author enautirakasle
- * 24 mar. 2017
+ * @author leei8 28 mar. 2017
  */
 
 public class ClienteControlador {
 
-	//TODO atributuak jarri
-	
-	public void zabalduBezeroKuedeatzailea(){
-		//TODO bezero kudeatzailea leihoa zabaldu
-		
+	// ---- Atributos
+	private ClienteModelo clienteModelo;
+	private Nagusia nagusia;
+	private BezeroKudeaketa bezeroKudeaketa;
+	private BezeroFormulario bezeroFormulario;
+
+	// ---- Metodos
+	public void abrirVentanaBezeroFormulario() {
+		bezeroFormulario.setVisible(true);
+
 	}
-	
-	public void zabalduBezeroFormularioa(){
-		//TODO bezero formularioa zabaldu
+
+	public void abrirVentanaBezeroKudeaketa() {
+		bezeroKudeaketa.setVisible(true);
+	}
+
+	// ---- Getters y Setters
+	public ClienteModelo getClienteModelo() {
+		return clienteModelo;
+	}
+
+	public void setClienteModelo(ClienteModelo clienteModelo) {
+		this.clienteModelo = clienteModelo;
+	}
+
+	public Nagusia getNagusia() {
+		return nagusia;
+	}
+
+	public void setNagusia(Nagusia nagusia) {
+		this.nagusia = nagusia;
+	}
+
+	public BezeroKudeaketa getBezeroKudeaketa() {
+		return bezeroKudeaketa;
+	}
+
+	public void setBezeroKudeaketa(BezeroKudeaketa bezeroKudeaketa) {
+		this.bezeroKudeaketa = bezeroKudeaketa;
+	}
+
+	public BezeroFormulario getBezeroFormulario() {
+		return bezeroFormulario;
+	}
+
+	public void setBezeroFormulario(BezeroFormulario bezeroFormulario) {
+		this.bezeroFormulario = bezeroFormulario;
+	}
+
+	public void bezeroBerriaSartu(String id, String nombre, String direccion, String codPostal, String telefono) {
+		Cliente cliente = new Cliente();
+		cliente.setId(id);
+		cliente.setNombre(nombre);
+		cliente.setDireccion(direccion);
+		cliente.setCodPostal(codPostal);
+		cliente.setTelefono(telefono);
 		
+		clienteModelo.insert(cliente);
 	}
 }

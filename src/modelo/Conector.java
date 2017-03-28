@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * @author enautirakasle 25 mar. 2017
+ * @author iklaurik95 25 mar. 2017
  */
 public class Conector {
 	protected Connection conexion;
@@ -20,7 +20,7 @@ public class Conector {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.conexion = DriverManager.getConnection(
-					"jdbc:mysql://" + Config.HOST + "/" + Config.BBDD + "," + Config.USERNAME + "," + Config.PASSWORD);
+					"jdbc:mysql://" + Config.HOST + "/" + Config.BBDD , Config.USERNAME, Config.PASSWORD);
 		} catch (ClassNotFoundException e) {
 
 			e.printStackTrace();
