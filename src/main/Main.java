@@ -6,6 +6,7 @@ import modelo.ClienteModelo;
 import modelo.ProductoModelo;
 import vista.BezeroFormulario;
 import vista.BezeroKudeaketa;
+import vista.BezeroaBorratu;
 import vista.Nagusia;
 
 public class Main {
@@ -24,11 +25,12 @@ public class Main {
 		Nagusia nagusia = new Nagusia();
 		BezeroKudeaketa bezeroKudeaketa = new BezeroKudeaketa(nagusia, true);
 		BezeroFormulario bezeroFormulario = new BezeroFormulario(bezeroKudeaketa,true);
-	
+		BezeroaBorratu bezeroaBorratu = new BezeroaBorratu(bezeroKudeaketa,true);
 		
 		nagusia.setClienteControlador(clienteControlador);
 		bezeroKudeaketa.setClienteControlador(clienteControlador);
 		bezeroFormulario.setClienteControlador(clienteControlador);
+		bezeroaBorratu.setClienteControlador(clienteControlador);
 		
 		nagusia.setClienteControlador(clienteControlador);
 		
@@ -36,6 +38,7 @@ public class Main {
 		clienteControlador.setNagusia(nagusia);
 		clienteControlador.setBezeroKudeaketa(bezeroKudeaketa);
 		clienteControlador.setBezeroFormulario(bezeroFormulario);
+		clienteControlador.setBezeroaBorratu(bezeroaBorratu);
 		clienteControlador.setClienteModelo(clienteModelo);
 		
 		nagusia.setVisible(true);

@@ -4,6 +4,7 @@ import modelo.Cliente;
 import modelo.ClienteModelo;
 import vista.BezeroFormulario;
 import vista.BezeroKudeaketa;
+import vista.BezeroaBorratu;
 import vista.Nagusia;
 
 /**
@@ -17,6 +18,7 @@ public class ClienteControlador {
 	private Nagusia nagusia;
 	private BezeroKudeaketa bezeroKudeaketa;
 	private BezeroFormulario bezeroFormulario;
+	private BezeroaBorratu bezeroaBorratu;
 
 	// ---- Metodos
 	public void abrirVentanaBezeroFormulario() {
@@ -26,6 +28,22 @@ public class ClienteControlador {
 
 	public void abrirVentanaBezeroKudeaketa() {
 		bezeroKudeaketa.setVisible(true);
+	}
+
+	public void bezeroBerriaSartu(String id, String nombre, String direccion, String codPostal, String telefono) {
+		Cliente cliente = new Cliente();
+		cliente.setId(id);
+		cliente.setNombre(nombre);
+		cliente.setDireccion(direccion);
+		cliente.setCodPostal(codPostal);
+		cliente.setTelefono(telefono);
+
+		clienteModelo.insert(cliente);
+	}
+
+	public void abrirVentanaBezeroaBorratu() {
+		bezeroaBorratu.setVisible(true);
+
 	}
 
 	// ---- Getters y Setters
@@ -61,14 +79,11 @@ public class ClienteControlador {
 		this.bezeroFormulario = bezeroFormulario;
 	}
 
-	public void bezeroBerriaSartu(String id, String nombre, String direccion, String codPostal, String telefono) {
-		Cliente cliente = new Cliente();
-		cliente.setId(id);
-		cliente.setNombre(nombre);
-		cliente.setDireccion(direccion);
-		cliente.setCodPostal(codPostal);
-		cliente.setTelefono(telefono);
-		
-		clienteModelo.insert(cliente);
+	public BezeroaBorratu getBezeroaBorratu() {
+		return bezeroaBorratu;
+	}
+
+	public void setBezeroaBorratu(BezeroaBorratu bezeroaBorratu) {
+		this.bezeroaBorratu = bezeroaBorratu;
 	}
 }

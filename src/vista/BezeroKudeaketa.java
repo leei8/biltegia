@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 
 
 public class BezeroKudeaketa extends JDialog {
@@ -60,17 +62,26 @@ public class BezeroKudeaketa extends JDialog {
 		
 		JLabel lblBezeroKudeaketa = new JLabel("BEZERO KUDEAKETA");
 		lblBezeroKudeaketa.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+		JButton btnBezeroaBorratu = new JButton("Bezeroa borratu");
+		btnBezeroaBorratu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clienteControlador.abrirVentanaBezeroaBorratu();
+			}
+		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGap(118)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(btnBezeroBerria, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblBezeroKudeaketa, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnConsulta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnBezeroak, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnConsulta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap(153, Short.MAX_VALUE))
+						.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(btnBezeroaBorratu, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnBezeroBerria, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblBezeroKudeaketa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -79,11 +90,13 @@ public class BezeroKudeaketa extends JDialog {
 					.addComponent(lblBezeroKudeaketa)
 					.addGap(18)
 					.addComponent(btnBezeroBerria)
-					.addGap(18)
-					.addComponent(btnBezeroak)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnBezeroaBorratu)
+					.addGap(67)
 					.addComponent(btnConsulta)
-					.addGap(98))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnBezeroak)
+					.addGap(22))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 	}
