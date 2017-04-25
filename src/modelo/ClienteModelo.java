@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package modelo;
 
 import java.sql.SQLException;
@@ -9,9 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-/**
- * @author enautirakasle 24 mar. 2017
- */
 
 public class ClienteModelo extends Conector {
 
@@ -75,6 +70,17 @@ public class ClienteModelo extends Conector {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void delete(String idCliente) {
+		try {
+			Statement st = super.getConexion().createStatement();
+			st.execute("DELETE FROM clientes " + "WHERE id= ('" + idCliente + "')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

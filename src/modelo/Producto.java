@@ -1,16 +1,15 @@
 package modelo;
 
-/**
- * @author enautirakasle 24 mar. 2017
- */
+import java.util.ArrayList;
 
 public class Producto {
-	// TODO crear atributos getters setters y constructor
-	int existencias;
-	int id;
-	String nombre;
-	double precio;
-	String proveedor;
+
+	private int existencias;
+	private int id;
+	private String nombre;
+	private double precio;
+	private String proveedor;
+	private ArrayList<DetallesPedido> detallesPedidos;
 
 	public Producto() {
 

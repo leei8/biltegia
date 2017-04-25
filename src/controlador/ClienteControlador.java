@@ -1,15 +1,13 @@
 package controlador;
 
+import java.util.ArrayList;
+
 import modelo.Cliente;
 import modelo.ClienteModelo;
 import vista.BezeroFormulario;
 import vista.BezeroKudeaketa;
 import vista.BezeroaBorratu;
 import vista.Nagusia;
-
-/**
- * @author leei8 28 mar. 2017
- */
 
 public class ClienteControlador {
 
@@ -41,10 +39,23 @@ public class ClienteControlador {
 		clienteModelo.insert(cliente);
 	}
 
+	
 	public void abrirVentanaBezeroaBorratu() {
-		bezeroaBorratu.setVisible(true);
+		ArrayList<Cliente> clientes = clienteModelo.selectAll();
+		this.bezeroaBorratu.rellenarCombo(clientes);
+		this.bezeroaBorratu.setVisible(true);
 
 	}
+
+	public void borrarCliente(String idCliente) {
+
+		clienteModelo.delete(idCliente);
+
+		// Rellenar de nuevo el formulario
+		ArrayList<Cliente> clientes = clienteModelo.selectAll();
+		bezeroaBorratu.resetearCombo(clientes);
+	}
+	
 
 	// ---- Getters y Setters
 	public ClienteModelo getClienteModelo() {
@@ -86,4 +97,5 @@ public class ClienteControlador {
 	public void setBezeroaBorratu(BezeroaBorratu bezeroaBorratu) {
 		this.bezeroaBorratu = bezeroaBorratu;
 	}
+
 }
