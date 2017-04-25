@@ -4,6 +4,7 @@ import controlador.ClienteControlador;
 import controlador.PedidoControlador;
 import controlador.ProductoControlador;
 import modelo.ClienteModelo;
+import modelo.DetallesPedidoModelo;
 import modelo.PedidoModelo;
 import modelo.ProductoModelo;
 import vista.BezeroFormulario;
@@ -26,6 +27,7 @@ public class Main {
 		ClienteModelo clienteModelo = new ClienteModelo();
 		ProductoModelo productoModelo = new ProductoModelo();
 		PedidoModelo pedidoModelo = new PedidoModelo();
+		DetallesPedidoModelo detallesPedidoModelo = new DetallesPedidoModelo();
 		
 		//Crear ventanas
 		Nagusia nagusia = new Nagusia();
@@ -59,6 +61,8 @@ public class Main {
 		pedidoControlador.setEskariKudeaketa(eskariKudeaketa);
 		pedidoControlador.setEskariKontsulta(eskariKontsulta);
 		pedidoControlador.setPedidoModelo(pedidoModelo);
+		pedidoControlador.setClienteModelo(clienteModelo);
+		pedidoControlador.setDetallesPedidoModelo(detallesPedidoModelo);
 		
 		nagusia.setVisible(true);
 		
