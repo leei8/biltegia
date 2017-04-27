@@ -41,18 +41,6 @@ public class BezeroKudeaketa extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
-		JButton btnBezeroak = new JButton("Bezeroak");
-		btnBezeroak.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
-		JButton btnConsulta = new JButton("Kontsulta");
-		btnConsulta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
 		JButton btnBezeroBerria = new JButton("Bezero berria");
 		btnBezeroBerria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -69,34 +57,40 @@ public class BezeroKudeaketa extends JDialog {
 				clienteControlador.abrirVentanaBezeroaBorratu();
 			}
 		});
+		
+		JButton btnBezeroenEskariak = new JButton("Bezeroaren eskariak ikusi");
+		btnBezeroenEskariak.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				clienteControlador.abrirVentanaBezeroenEskariak();
+			}
+		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGap(118)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnConsulta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnBezeroak, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(btnBezeroaBorratu, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnBezeroBerria, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(lblBezeroKudeaketa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-					.addContainerGap())
+					.addComponent(lblBezeroKudeaketa)
+					.addContainerGap(153, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
+					.addGap(66)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnBezeroenEskariak, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+						.addComponent(btnBezeroBerria, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnBezeroaBorratu, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(97))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblBezeroKudeaketa)
-					.addGap(18)
+					.addGap(54)
 					.addComponent(btnBezeroBerria)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(18)
 					.addComponent(btnBezeroaBorratu)
-					.addGap(67)
-					.addComponent(btnConsulta)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnBezeroak)
-					.addGap(22))
+					.addGap(18)
+					.addComponent(btnBezeroenEskariak)
+					.addGap(62))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 	}

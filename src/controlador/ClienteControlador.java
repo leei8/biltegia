@@ -1,12 +1,15 @@
 package controlador;
 
 import java.util.ArrayList;
-
 import modelo.Cliente;
 import modelo.ClienteModelo;
+import modelo.DetallesPedidoModelo;
+import modelo.Pedido;
+import modelo.PedidoModelo;
 import vista.BezeroFormulario;
 import vista.BezeroKudeaketa;
 import vista.BezeroaBorratu;
+import vista.BezeroenEskariak;
 import vista.Nagusia;
 
 public class ClienteControlador {
@@ -17,6 +20,25 @@ public class ClienteControlador {
 	private BezeroKudeaketa bezeroKudeaketa;
 	private BezeroFormulario bezeroFormulario;
 	private BezeroaBorratu bezeroaBorratu;
+	private BezeroenEskariak bezeroenEskariak;
+	private PedidoModelo pedidoModelo;
+	private DetallesPedidoModelo detallesPedidoModelo;
+
+	public PedidoModelo getPedidoModelo() {
+		return pedidoModelo;
+	}
+
+	public void setPedidoModelo(PedidoModelo pedidoModelo) {
+		this.pedidoModelo = pedidoModelo;
+	}
+
+	public DetallesPedidoModelo getDetallesPedidoModelo() {
+		return detallesPedidoModelo;
+	}
+
+	public void setDetallesPedidoModelo(DetallesPedidoModelo detallesPedidoModelo) {
+		this.detallesPedidoModelo = detallesPedidoModelo;
+	}
 
 	// ---- Metodos
 	public void abrirVentanaBezeroFormulario() {
@@ -39,7 +61,6 @@ public class ClienteControlador {
 		clienteModelo.insert(cliente);
 	}
 
-	
 	public void abrirVentanaBezeroaBorratu() {
 		ArrayList<Cliente> clientes = clienteModelo.selectAll();
 		this.bezeroaBorratu.rellenarCombo(clientes);
@@ -55,7 +76,23 @@ public class ClienteControlador {
 		ArrayList<Cliente> clientes = clienteModelo.selectAll();
 		bezeroaBorratu.resetearCombo(clientes);
 	}
-	
+
+	public void abrirVentanaBezeroenEskariak() {
+		ArrayList<Cliente> clientes = clienteModelo.selectAll();
+		this.bezeroenEskariak.rellenarListaClientes(clientes);
+		this.bezeroenEskariak.setVisible(true);
+
+	}
+
+	public void ensenarPedidosDeCliente(String idCliente) {
+		Cliente clienteSeleccionado = clienteModelo.select(idCliente);
+		ArrayList<Pedido> pedidosCliente = pedidoModelo.selectPorIdCliente(idCliente);
+		
+		
+
+		bezeroenEskariak.rellenarTablaPedidosDeCliente(pedidosCliente);
+
+	}
 
 	// ---- Getters y Setters
 	public ClienteModelo getClienteModelo() {
@@ -96,6 +133,14 @@ public class ClienteControlador {
 
 	public void setBezeroaBorratu(BezeroaBorratu bezeroaBorratu) {
 		this.bezeroaBorratu = bezeroaBorratu;
+	}
+
+	public BezeroenEskariak getBezeroenEskariak() {
+		return bezeroenEskariak;
+	}
+
+	public void setBezeroenEskariak(BezeroenEskariak bezeroenEskariak) {
+		this.bezeroenEskariak = bezeroenEskariak;
 	}
 
 }

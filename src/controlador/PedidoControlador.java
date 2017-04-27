@@ -7,6 +7,7 @@ import modelo.Cliente;
 import modelo.ClienteModelo;
 import modelo.DetallesPedido;
 import modelo.DetallesPedidoModelo;
+import vista.BezeroenEskariak;
 import vista.EskariKontsulta;
 import vista.EskariKudeaketa;
 import vista.Nagusia;
@@ -20,8 +21,15 @@ public class PedidoControlador {
 	private EskariKontsulta eskariKontsulta;
 	private ClienteModelo clienteModelo;
 	private DetallesPedidoModelo detallesPedidoModelo;
+	private BezeroenEskariak bezeroenEskariak;
 	
 	
+	public BezeroenEskariak getBezeroenEskariak() {
+		return bezeroenEskariak;
+	}
+	public void setBezeroenEskariak(BezeroenEskariak bezeroenEskariak) {
+		this.bezeroenEskariak = bezeroenEskariak;
+	}
 	public PedidoModelo getPedidoModelo() {
 		return pedidoModelo;
 	}
