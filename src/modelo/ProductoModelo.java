@@ -6,22 +6,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- * @author enautirakasle
- * 24 mar. 2017
- */
+import controlador.ClienteControlador;
+
+
 public class ProductoModelo extends Conector{
 	
+	private ClienteControlador clienteControlador;
+	
+	
+	public ClienteControlador getClienteControlador() {
+		return clienteControlador;
+	}
+
+	public void setClienteControlador(ClienteControlador clienteControlador) {
+		this.clienteControlador = clienteControlador;
+	}
+
 	public ArrayList<Producto> selectAll() {
 		//TODO produkutu guztiak itzuliko ditu
 		return null;
 	}
 	
-	Producto select(int id){
+	public Producto select(int id){
 		//TODO id hori duen produktua itzultzen du
 		try {
 			Statement st = this.conexion.createStatement();
-			ResultSet rs = st.executeQuery("select * from socios where id='" + id + "'");
+			ResultSet rs = st.executeQuery("select * from productos where id='" + id + "'");
 			rs.next();
 			Producto producto = new Producto();
 			producto.setId(id);

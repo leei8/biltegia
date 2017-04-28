@@ -62,6 +62,7 @@ public class Main {
 		clienteControlador.setBezeroenEskariak(bezeroenEskariak);
 		clienteControlador.setClienteModelo(clienteModelo);
 		clienteControlador.setPedidoModelo(pedidoModelo);
+		clienteControlador.setProductoModelo(productoModelo);
 		clienteControlador.setDetallesPedidoModelo(detallesPedidoModelo);
 		
 		pedidoControlador.setNagusia(nagusia);

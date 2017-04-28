@@ -11,6 +11,7 @@ import javax.swing.table.TableRowSorter;
 import controlador.ClienteControlador;
 import controlador.PedidoControlador;
 import modelo.Cliente;
+import modelo.DetallesPedido;
 import modelo.Pedido;
 
 import javax.swing.JList;
@@ -22,6 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class BezeroenEskariak extends JDialog {
 
@@ -111,6 +114,8 @@ public class BezeroenEskariak extends JDialog {
 		contentPanel.add(lblPrecioDelPedido);
 
 		precioPedido = new JTextField();
+		precioPedido.setFont(new Font("Tahoma", Font.BOLD, 16));
+		precioPedido.setHorizontalAlignment(SwingConstants.CENTER);
 		precioPedido.setEditable(false);
 		precioPedido.setBounds(297, 202, 107, 34);
 		contentPanel.add(precioPedido);
@@ -118,7 +123,10 @@ public class BezeroenEskariak extends JDialog {
 	}
 
 	protected void tablaPedidosDeClienteMouseClicked() {
-	//	int pedidoSeleccionado = tablaPedidosDeClientes.
+		int lineaSeleccionada = tablaPedidosDeCliente.getSelectedRow();
+		int idPedido = (int) this.tablaPedidosDeCliente.getModel().getValueAt(lineaSeleccionada,0);	
+
+		this.clienteControlador.ensenarDetallesDePedido(idPedido);
 		
 	}
 
@@ -159,6 +167,36 @@ public class BezeroenEskariak extends JDialog {
 		TableRowSorter<DefaultTableModel> modeloOrdenado;
 		modeloOrdenado = new TableRowSorter<DefaultTableModel>(defaultTableModel);
 		tablaPedidosDeCliente.setRowSorter(modeloOrdenado);
+	}
+
+	public void rellenarTablaDetallesDePedido(ArrayList<DetallesPedido> detallesDePedido) {
+		DefaultTableModel defaultTableModel = new DefaultTableModel();
+
+		Object[] cabecera = { "Nombre", "Precio", "Cantidad" };
+		defaultTableModel.setColumnIdentifiers(cabecera);
+
+		for (DetallesPedido detallesPedido : detallesDePedido) {
+
+			Object[] linea = { detallesPedido.getProducto().getNombre(),detallesPedido.getProducto().getPrecio(),detallesPedido.getCantidad()};
+			defaultTableModel.addRow(linea);
+		}
+
+		this.tablaDetallesPedido.setModel(defaultTableModel);
+		
+
+		TableRowSorter<DefaultTableModel> modeloOrdenado;
+		modeloOrdenado = new TableRowSorter<DefaultTableModel>(defaultTableModel);
+		this.tablaDetallesPedido.setRowSorter(modeloOrdenado);
+		
+		//Rellenar campo del precio total
+		int numeroFilas = tablaDetallesPedido.getRowCount();
+		double precioTotal = 0.0;
+		for (int i = 0; i < numeroFilas; i++){
+			double precio = (double) this.tablaDetallesPedido.getModel().getValueAt(i, 1);
+			int cantidad =  (int) this.tablaDetallesPedido.getModel().getValueAt(i, 2);
+			precioTotal = precioTotal + precio*cantidad;
+		}
+		this.precioPedido.setText(String.valueOf(precioTotal) + "€");
 	}
 
 }

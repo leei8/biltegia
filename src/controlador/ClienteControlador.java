@@ -3,9 +3,12 @@ package controlador;
 import java.util.ArrayList;
 import modelo.Cliente;
 import modelo.ClienteModelo;
+import modelo.DetallesPedido;
 import modelo.DetallesPedidoModelo;
 import modelo.Pedido;
 import modelo.PedidoModelo;
+import modelo.Producto;
+import modelo.ProductoModelo;
 import vista.BezeroFormulario;
 import vista.BezeroKudeaketa;
 import vista.BezeroaBorratu;
@@ -23,22 +26,9 @@ public class ClienteControlador {
 	private BezeroenEskariak bezeroenEskariak;
 	private PedidoModelo pedidoModelo;
 	private DetallesPedidoModelo detallesPedidoModelo;
+	private ProductoModelo productoModelo;
 
-	public PedidoModelo getPedidoModelo() {
-		return pedidoModelo;
-	}
-
-	public void setPedidoModelo(PedidoModelo pedidoModelo) {
-		this.pedidoModelo = pedidoModelo;
-	}
-
-	public DetallesPedidoModelo getDetallesPedidoModelo() {
-		return detallesPedidoModelo;
-	}
-
-	public void setDetallesPedidoModelo(DetallesPedidoModelo detallesPedidoModelo) {
-		this.detallesPedidoModelo = detallesPedidoModelo;
-	}
+	
 
 	// ---- Metodos
 	public void abrirVentanaBezeroFormulario() {
@@ -88,13 +78,49 @@ public class ClienteControlador {
 		Cliente clienteSeleccionado = clienteModelo.select(idCliente);
 		ArrayList<Pedido> pedidosCliente = pedidoModelo.selectPorIdCliente(idCliente);
 		
-		
-
 		bezeroenEskariak.rellenarTablaPedidosDeCliente(pedidosCliente);
-
+	}
+	
+	public void ensenarDetallesDePedido(int idPedido) {
+		
+		ArrayList<DetallesPedido> detallesDePedido = detallesPedidoModelo.selectPorIdPedido(idPedido);
+		
+		for(DetallesPedido detallesPedido: detallesDePedido){
+			Producto producto = this.productoModelo.select(detallesPedido.getIdProducto());
+			detallesPedido.setProducto(producto);
+		}
+		this.bezeroenEskariak.rellenarTablaDetallesDePedido(detallesDePedido);
 	}
 
+
+	
+
 	// ---- Getters y Setters
+	
+	public ProductoModelo getProductoModelo() {
+		return productoModelo;
+	}
+
+	public void setProductoModelo(ProductoModelo productoModelo) {
+		this.productoModelo = productoModelo;
+	}
+	
+	public PedidoModelo getPedidoModelo() {
+		return pedidoModelo;
+	}
+
+	public void setPedidoModelo(PedidoModelo pedidoModelo) {
+		this.pedidoModelo = pedidoModelo;
+	}
+
+	public DetallesPedidoModelo getDetallesPedidoModelo() {
+		return detallesPedidoModelo;
+	}
+
+	public void setDetallesPedidoModelo(DetallesPedidoModelo detallesPedidoModelo) {
+		this.detallesPedidoModelo = detallesPedidoModelo;
+	}
+	
 	public ClienteModelo getClienteModelo() {
 		return clienteModelo;
 	}
